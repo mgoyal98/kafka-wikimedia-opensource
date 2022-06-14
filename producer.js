@@ -2,7 +2,10 @@ const kafka = require('./kafka');
 const config = require('./config');
 const EventSource = require('eventsource');
 
-const producer = kafka.producer();
+const producer = kafka.producer({
+  idempotent: true,
+  retry: { retries: Number.MAX_SAFE_INTEGER, maxRetryTime: 1200 },
+});
 
 const main = async () => {
   await producer.connect();
@@ -16,6 +19,7 @@ const main = async () => {
       const message = await producer.send({
         topic: config.kafka.topic,
         messages: [{ value: event.data }],
+        acks: -1,
       });
       console.log('\n\n========== Message Produced ===========');
       console.log(message);
