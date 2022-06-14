@@ -4,7 +4,6 @@ const EventSource = require('eventsource');
 
 const producer = kafka.producer({
   idempotent: true,
-  retry: { retries: Number.MAX_SAFE_INTEGER, maxRetryTime: 1200 },
 });
 
 const main = async () => {
