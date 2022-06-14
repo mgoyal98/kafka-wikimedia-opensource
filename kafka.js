@@ -1,5 +1,8 @@
-const { Kafka } = require('kafkajs');
+const { Kafka, CompressionTypes, CompressionCodecs } = require('kafkajs');
 const config = require('./config');
+const SnappyCodec = require('kafkajs-snappy');
+
+CompressionCodecs[CompressionTypes.Snappy] = SnappyCodec;
 
 const kafkaClient = new Kafka({
   clientId: config.kafka.clientId,

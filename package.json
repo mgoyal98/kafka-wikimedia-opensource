@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "eventsource": "^2.0.2",
-    "kafkajs": "^2.0.2"
+    "kafkajs": "^2.0.2",
+    "kafkajs-snappy": "^1.1.0"
   },
   "name": "kafka-js",
   "version": "1.0.0",

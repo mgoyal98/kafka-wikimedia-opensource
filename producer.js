@@ -1,6 +1,7 @@
 const kafka = require('./kafka');
 const config = require('./config');
 const EventSource = require('eventsource');
+const { CompressionTypes } = require('kafkajs');
 
 const producer = kafka.producer({
   idempotent: true,
@@ -18,6 +19,7 @@ const main = async () => {
       const message = await producer.send({
         topic: config.kafka.topic,
         messages: [{ value: event.data }],
+        compression: CompressionTypes.Snappy,
         acks: -1,
       });
       console.log('\n\n========== Message Produced ===========');
